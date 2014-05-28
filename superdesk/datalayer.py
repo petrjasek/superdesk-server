@@ -5,6 +5,7 @@ from eve.utils import config, ParsedRequest
 from eve_elastic import Elastic
 from .signals import send
 from .utils import import_by_path
+from superdesk.bussiness_datalayer import BussinessDataLayer
 
 
 class SuperdeskDataLayer(DataLayer):
@@ -16,6 +17,7 @@ class SuperdeskDataLayer(DataLayer):
     def init_app(self, app):
         self.mongo = Mongo(app)
         self.elastic = Elastic(app)
+        self.business = BussinessDataLayer(app)
 
         if 'DEFAULT_FILE_STORAGE' in app.config:
             self.storage = import_by_path(app.config['DEFAULT_FILE_STORAGE'])()
