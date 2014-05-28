@@ -5,6 +5,7 @@ from eve_elastic import Elastic
 from pyelasticsearch.exceptions import IndexAlreadyExistsError
 from .signals import send
 from .utils import import_by_path
+from superdesk.bussiness_datalayer import BussinessDataLayer
 
 
 class SuperdeskDataLayer(Mongo):
@@ -17,6 +18,7 @@ class SuperdeskDataLayer(Mongo):
     def init_app(self, app):
         super(SuperdeskDataLayer, self).init_app(app)
         self.elastic = Elastic(app)
+        self.business = BussinessDataLayer(app)
 
         if 'DEFAULT_FILE_STORAGE' in app.config:
             self.storage = import_by_path(app.config['DEFAULT_FILE_STORAGE'])()
