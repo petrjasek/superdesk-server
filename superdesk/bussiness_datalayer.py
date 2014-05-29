@@ -29,7 +29,7 @@ class BussinessDataLayer(DataLayer):
         return self._send('impl_delete', resource, lookup=lookup)
 
     def _send(self, signal, resource, **kwargs):
-        result = send('%s:%s' % (signal, resource), self, **kwargs)
+        result = send('%s:%s' % (signal, resource), self.app.data, **kwargs)
         if not result or len(result) == 0: 
             raise NotImplementedError 
         elif len(result) > 1:    
