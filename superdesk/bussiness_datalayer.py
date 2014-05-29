@@ -30,6 +30,7 @@ class BussinessDataLayer(DataLayer):
 
     def _send(self, signal, resource, **kwargs):
         result = send('%s:%s' % (signal, resource), self.app.data, **kwargs)
+
         if not result or len(result) == 0: 
             raise NotImplementedError 
         elif len(result) > 1:    
