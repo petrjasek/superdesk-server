@@ -17,7 +17,7 @@ class SuperdeskEve(eve.Eve):
     """Superdesk app"""
 
     def __init__(self, **kwargs):
-        super(SuperdeskEve, self).__init__('Superdesk', **kwargs)
+        super(SuperdeskEve, self).__init__(**kwargs)
 
     def load_config(self):
         """Let us override settings withing plugins"""
