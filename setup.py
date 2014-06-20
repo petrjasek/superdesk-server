@@ -6,7 +6,7 @@ LONG_DESCRIPTION = open('README.md').read()
 
 setup(
     name='Superdesk-Server',
-    version='0.1.1',
+    version='0.1.2',
     description='Superdesk REST API server',
     long_description=LONG_DESCRIPTION,
     author='petr jasek',
@@ -16,11 +16,12 @@ setup(
     platforms=['any'],
     packages=find_packages(),
     install_requires=[
-        'Eve==0.4-dev',
-        'Eve-Elastic==0.1.10',
-        'Eve-Docs==0.1.2',
+        'Eve>=0.4-dev',
+        'Eve-Elastic>=0.1.10',
+        'Eve-Docs>=0.1.2',
         'Flask-Script==2.0.3',
         'Pillow==2.4.0',
+        'blinker==1.3',
     ],
     scripts=['settings.py', 'app.py', 'wsgi.py', 'manage.py', 'docs.py'],
     classifiers=[
