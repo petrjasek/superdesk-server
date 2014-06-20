@@ -16,9 +16,10 @@ setup(
     platforms=['any'],
     packages=find_packages(),
     install_requires=[
-        'Eve>=0.4-dev',
-        'Eve-Elastic>=0.1.10',
-        'Eve-Docs>=0.1.2',
+        'Eve==0.4',
+        'Eve-Elastic==0.1.10',
+        'Eve-Docs==0.1.2',
+        'Flask==0.10.1',
         'Flask-Script==2.0.3',
         'Pillow==2.4.0',
         'blinker==1.3',
