@@ -1,13 +1,17 @@
 language: python
+
 python:
     - "3.3"
     - "3.4"
 
 services:
+    - redis
     - mongodb
     - elasticsearch
 
-install: "python setup.py install"
+install:
+    - python setup.py install
+    - pip install -r dev_requirements.txt
 
 script:
     - nosetests
