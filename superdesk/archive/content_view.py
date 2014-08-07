@@ -1,8 +1,11 @@
-from eve.utils import ParsedRequest
 
-import superdesk
-from superdesk.base_model import BaseModel
+import flask
 import logging
+import superdesk
+
+from eve.utils import ParsedRequest
+from superdesk.base_model import BaseModel
+from flask import json
 
 logger = logging.getLogger(__name__)
 
@@ -17,35 +20,23 @@ class ContentViewModel(BaseModel):
         },
         'description': {
             'type': 'string',
-            'minlength': 1
         },
-        'location': {
-            'type': 'string',
-            'allowed': ['ingest', 'archive'],
-            'required': True
+        'desk': {
+            'type': 'objectid'
         },
-        'desks': {
-            'type': 'list',
-            'schema': {
-                'type': 'string'
-            }
-        },
-        'roles': {
-            'type': 'list',
-            'schema': {
-                'type': 'string'
-            }
+        'user': {
+            'type': 'objectid'
         },
         'filter': {
-            'type': 'string'
+            'type': 'dict'
         }
     }
 
-    def check_filter(self, filter, location):
+    def check_filter(self, filter, location='archive'):
         # TOOD: change this after refactoring Eve to avoid direct access to request
         # object on datalayer
         parsed_request = ParsedRequest()
-        parsed_request.args = {'source': filter}
+        parsed_request.args = {'source': json.dumps({'query': {'filtered': {'filter': filter}}})}
         payload = None
         try:
             superdesk.apps[location].get(req=parsed_request, lookup={})
@@ -56,17 +47,12 @@ class ContentViewModel(BaseModel):
             raise superdesk.SuperdeskError(payload=payload)
 
     def process_and_validate(self, doc):
-        # if desks/roles list is empty set it as None in order filter by desks/roles more easily
-        if 'desks' in doc and not doc['desks']:
-            del doc['desks']
-        if 'roles' in doc and not doc['roles']:
-            del doc['roles']
-
         if 'filter' in doc and doc['filter']:
-            self.check_filter(doc['filter'], doc['location'])
+            self.check_filter(doc['filter'])
 
     def on_create(self, docs):
         for doc in docs:
+            doc.setdefault('user', flask.g.user['_id'])
             self.process_and_validate(doc)
 
     def on_update(self, updates, original):
