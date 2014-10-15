@@ -17,7 +17,7 @@ class CreateUserCommand(superdesk.Command):
         superdesk.Option('--username', '-u', dest='username', required=True),
         superdesk.Option('--password', '-p', dest='password', required=True),
         superdesk.Option('--email', '-e', dest='email', required=True),
-        superdesk.Option('--admin', '-a', dest='admin', required=False),
+        superdesk.Option('--admin', '-a', dest='admin', required=False, default='false'),
     )
 
     def run(self, username, password, email, admin='false'):
@@ -38,16 +38,16 @@ class CreateUserCommand(superdesk.Command):
                 userdata['password'] = get_hash(userdata.get('password'),
                                                 app.config.get('BCRYPT_GENSALT_WORK_FACTOR', 12))
 
-            user = superdesk.get_resource_service('users').find_one(username=userdata.get('username'), req=None)
+            user = app.data.find_one('users', username=userdata.get('username'), req=None)
 
             if user:
                 logger.info('updating user %s' % (userdata))
-                superdesk.get_resource_service('users').patch(user.get('_id'), userdata)
+                app.data.update('users', user.get('_id'), userdata)
                 return userdata
             else:
                 logger.info('creating user %s' % (userdata))
                 userdata[app.config['DATE_CREATED']] = userdata[app.config['LAST_UPDATED']]
-                superdesk.get_resource_service('users').post([userdata])
+                app.data.insert('users', [userdata])
 
             logger.info('user saved %s' % (userdata))
             return userdata

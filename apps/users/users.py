@@ -1,5 +1,4 @@
 """Superdesk Users"""
-from settings import LDAP_SERVER
 from superdesk.resource import Resource
 
 
@@ -26,7 +25,7 @@ class RolesResource(Resource):
 
 
 class UsersResource(Resource):
-    readonly = True if LDAP_SERVER else False
+    readonly = False
 
     additional_lookup = {
         'url': 'regex("[\w]+")',
