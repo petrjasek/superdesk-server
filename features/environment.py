@@ -1,6 +1,6 @@
 from superdesk import tests
 from superdesk.io.tests import setup_providers, teardown_providers
-from settings import LDAP_SERVER
+from superdesk.settings import LDAP_SERVER
 from flask import json
 
 

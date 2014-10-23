@@ -1,4 +1,4 @@
-from settings import LDAP_SERVER
+from superdesk.settings import LDAP_SERVER
 from superdesk.tests import TestCase
 from superdesk import get_resource_service
 from .commands import CreateUserCommand

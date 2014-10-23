@@ -5,7 +5,7 @@ from superdesk.resource import Resource
 from superdesk.services import BaseService
 from superdesk.utc import utcnow
 from superdesk.utils import get_random_string, get_hash
-from settings import RESET_PASSWORD_TOKEN_TIME_TO_LIVE as token_ttl, ADMINS
+from superdesk.settings import RESET_PASSWORD_TOKEN_TIME_TO_LIVE as token_ttl, ADMINS
 from superdesk.emails import send_email
 
 

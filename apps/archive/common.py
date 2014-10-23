@@ -1,6 +1,6 @@
 from superdesk.utc import utcnow
 from datetime import datetime
-from settings import SERVER_DOMAIN
+from superdesk.settings import SERVER_DOMAIN
 from uuid import uuid4
 from superdesk import SuperdeskError
 from superdesk.notification import push_notification

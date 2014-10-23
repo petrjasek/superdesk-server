@@ -4,7 +4,6 @@ import logging
 import importlib
 import jinja2
 import eve
-import settings
 import superdesk
 from flask.ext.mail import Mail
 from eve.io.mongo import MongoJSONEncoder
@@ -23,15 +22,15 @@ sentry = Sentry(register_signal=False, wrap_wsgi=False)
 def get_app(config=None):
     """App factory.
 
-    :param config: configuration that can override config from `settings.py`
+    :param config: configuration that can override config from `superdesk.settings`
     :return: a new SuperdeskEve app instance
     """
     if config is None:
         config = {}
 
-    for key in dir(settings):
+    for key in dir(superdesk.settings):
         if key.isupper():
-            config.setdefault(key, getattr(settings, key))
+            config.setdefault(key, getattr(superdesk.settings, key))
 
     media_storage = SuperdeskGridFSMediaStorage
 

@@ -1,7 +1,7 @@
 from superdesk.activity import add_activity
 from eve.utils import ParsedRequest
 from flask import g, render_template
-from settings import ADMINS
+from superdesk.settings import ADMINS
 
 from superdesk.emails import send_email
 

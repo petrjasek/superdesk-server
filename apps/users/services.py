@@ -3,7 +3,7 @@ from superdesk.services import BaseService
 from superdesk.utils import is_hashed, get_hash
 from superdesk import get_resource_service
 from flask import current_app as app, render_template
-from settings import ADMINS
+from superdesk.settings import ADMINS
 from superdesk.emails import send_email
 
 
