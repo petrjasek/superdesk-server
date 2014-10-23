@@ -27,7 +27,6 @@ setup(
         'bcrypt>=1.0.2',
         'blinker>=1.3',
     ],
-    scripts=['settings.py', 'app.py', 'wsgi.py', 'ws.py', 'manage.py'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
