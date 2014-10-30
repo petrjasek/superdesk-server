@@ -108,3 +108,5 @@ class UsersResource(Resource):
             'preferences': 0
         }
     }
+
+    item_methods = ['GET', 'PATCH']

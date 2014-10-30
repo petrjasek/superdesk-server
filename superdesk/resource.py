@@ -34,6 +34,7 @@ class Resource():
     item_methods = None
     resource_methods = None
     public_methods = None
+    public_item_methods = None
     extra_response_fields = None
     embedded_fields = None
     datasource = None
@@ -73,6 +74,8 @@ class Resource():
                 endpoint_schema.update({'internal_resource': self.internal_resource})
             if self.resource_title is not None:
                 endpoint_schema.update({'resource_title': self.resource_title})
+            if self.public_item_methods is not None:
+                endpoint_schema.update({'public_item_methods': self.public_item_methods})
         self.endpoint_schema = endpoint_schema
 
         on_fetched_resource = getattr(app, 'on_fetched_resource_%s' % self.endpoint_name)
