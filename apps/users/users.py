@@ -109,4 +109,4 @@ class UsersResource(Resource):
         }
     }
 
-    item_methods = ['GET', 'PATCH']
+    item_methods = ['GET', 'PATCH', 'DELETE']
