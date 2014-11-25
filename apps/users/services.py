@@ -66,10 +66,6 @@ class UsersService(BaseService):
     def on_deleted(self, doc):
         add_activity('removed user {{user}}', user=doc.get('display_name', doc.get('username')))
 
-    def find_one(self, req, **lookup):
-        doc = super().find_one(req, **lookup)
-        return doc
-
     def on_fetched(self, document):
         for doc in document['_items']:
             self.update_user_defaults(doc)

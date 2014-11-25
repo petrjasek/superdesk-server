@@ -45,6 +45,7 @@ class TaskResource(Resource):
             }
         }
     }
+    privileges = {'POST': 'workflow', 'PATCH': 'workflow', 'DELETE': 'workflow'}
 
 
 class TasksService(BaseService):
@@ -95,3 +96,7 @@ class TasksService(BaseService):
         item['task']['user'] = user
         del item['_id']
         return self.patch(item_id, item)
+
+superdesk.privilege(name='workflow',
+                    label='Workflow Management',
+                    description='User can change the state of an item within the workflow.')
